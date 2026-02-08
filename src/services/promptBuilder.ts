@@ -47,6 +47,28 @@ function buildProductSection(analysis: ProductAnalysis | null, productDescriptio
   return lines.filter(Boolean).join('\n');
 }
 
+function buildOverlaySection(overlayText?: string, mode: 'image' | 'video' = 'image'): string[] {
+  if (!overlayText) return [];
+
+  if (mode === 'video') {
+    return [
+      '--- NARRATION / VOIX-OFF ---',
+      `The following text MUST be spoken as voice-over narration in French during the video:`,
+      `"${overlayText}"`,
+      `Deliver it with a warm, professional, and clear French voice. Match the pacing to the video rhythm.`,
+      '',
+    ];
+  }
+
+  return [
+    '--- TEXT ON IMAGE ---',
+    `Integrate the following text visually on the image, as a professional typographic overlay:`,
+    `"${overlayText}"`,
+    `Use clean, modern typography that matches the brand aesthetic. The text must be in French and clearly legible.`,
+    '',
+  ];
+}
+
 function buildNegativeSection(category: ProductCategory): string {
   const nc = negativeConstraints;
   const global = [
@@ -95,7 +117,8 @@ export function buildEditPrompt(
   category: ProductCategory,
   productAnalysis: ProductAnalysis | null,
   customContext?: string,
-  productDescription?: string
+  productDescription?: string,
+  overlayText?: string
 ): string {
   const t = promptTemplates.edit;
   const contextSection = customContext
@@ -117,6 +140,7 @@ export function buildEditPrompt(
     (productAnalysis || productDescription) ? '--- PRODUCT TO PRESERVE ---' : '',
     buildProductSection(productAnalysis, productDescription),
     '',
+    ...buildOverlaySection(overlayText, 'image'),
     '--- CONSTRAINTS ---',
     buildNegativeSection(category),
   ].filter(Boolean).join('\n');
@@ -127,7 +151,8 @@ export function buildGeneratePrompt(
   category: ProductCategory,
   productAnalysis: ProductAnalysis | null,
   customContext?: string,
-  productDescription?: string
+  productDescription?: string,
+  overlayText?: string
 ): string {
   const t = promptTemplates.generate;
   const contextSection = customContext
@@ -149,6 +174,7 @@ export function buildGeneratePrompt(
     (productAnalysis || productDescription) ? '--- PRODUCT TO RECREATE ---' : '',
     buildProductSection(productAnalysis, productDescription),
     '',
+    ...buildOverlaySection(overlayText, 'image'),
     '--- CONSTRAINTS ---',
     buildNegativeSection(category),
   ].filter(Boolean).join('\n');
@@ -159,7 +185,8 @@ export function buildVideoPrompt(
   category: ProductCategory,
   productAnalysis: ProductAnalysis | null,
   customContext?: string,
-  productDescription?: string
+  productDescription?: string,
+  overlayText?: string
 ): string {
   const t = promptTemplates.video;
   const contextSection = customContext
@@ -181,6 +208,7 @@ export function buildVideoPrompt(
     (productAnalysis || productDescription) ? '--- PRODUCT ---' : '',
     buildProductSection(productAnalysis, productDescription),
     '',
+    ...buildOverlaySection(overlayText, 'video'),
     '--- CONSTRAINTS ---',
     buildNegativeSection(category),
     '',

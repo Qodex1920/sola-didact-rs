@@ -20,6 +20,7 @@ export default function App() {
   const [customContext, setCustomContext] = useState<CustomContextFields>(EMPTY_CUSTOM_CONTEXT);
   const [useCustomContext, setUseCustomContext] = useState(false);
   const [productDescription, setProductDescription] = useState('');
+  const [overlayText, setOverlayText] = useState('');
   const [videoQuality, setVideoQuality] = useState<VideoQuality>('fast');
 
   const imageUpload = useImageUpload();
@@ -71,10 +72,11 @@ export default function App() {
         customContext: ctxCustom,
         currentAnalysis: generation.productAnalysis,
         productDescription: productDescription.trim() || undefined,
+        overlayText: overlayText.trim() || undefined,
         videoQuality,
       })
       .then(() => setHistoryKey((k) => k + 1));
-  }, [generation, appMode, imageUpload.uploadedImage, selectedContext, category, aspectRatio, proSize, customContext, useCustomContext, productDescription, videoQuality]);
+  }, [generation, appMode, imageUpload.uploadedImage, selectedContext, category, aspectRatio, proSize, customContext, useCustomContext, productDescription, overlayText, videoQuality]);
 
   const handleHistorySelect = useCallback(
     (asset: import('@/types').GeneratedAsset) => {
@@ -116,6 +118,8 @@ export default function App() {
               isAnalyzing={generation.isAnalyzing}
               productDescription={productDescription}
               onProductDescriptionChange={setProductDescription}
+              overlayText={overlayText}
+              onOverlayTextChange={setOverlayText}
               videoQuality={videoQuality}
               onVideoQualityChange={setVideoQuality}
             />

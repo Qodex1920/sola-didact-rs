@@ -27,6 +27,8 @@ interface ControlPanelProps {
   isAnalyzing: boolean;
   productDescription: string;
   onProductDescriptionChange: (value: string) => void;
+  overlayText: string;
+  onOverlayTextChange: (value: string) => void;
   videoQuality: VideoQuality;
   onVideoQualityChange: (quality: VideoQuality) => void;
 }
@@ -55,6 +57,8 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   isAnalyzing,
   productDescription,
   onProductDescriptionChange,
+  overlayText,
+  onOverlayTextChange,
   videoQuality,
   onVideoQualityChange,
 }) => {
@@ -160,6 +164,38 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
           )}
         </div>
       )}
+
+      {/* 2c. Overlay Text / Narration */}
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-sm font-bold text-gray-700">
+            {appMode === AppMode.VIDEO ? 'Narration / Voix-off' : 'Texte sur l\'image'}
+          </h2>
+          <span className="text-[10px] text-gray-400">Optionnel</span>
+        </div>
+        <p className="text-[11px] text-gray-400 mb-3">
+          {appMode === AppMode.VIDEO
+            ? 'Definis ce qui doit etre dit/narre dans la video (voix-off, dialogue).'
+            : 'Definis le texte visible a integrer sur l\'image (titre, slogan, prix...).'}
+        </p>
+        <textarea
+          value={overlayText}
+          onChange={(e) => onOverlayTextChange(e.target.value)}
+          placeholder={
+            appMode === AppMode.VIDEO
+              ? 'Ex: "Decouvrez notre nouveau jeu educatif, concu pour les enfants de 3 a 6 ans."'
+              : 'Ex: "Nouveau" en haut a gauche, "A partir de 29 CHF" en bas'
+          }
+          className="w-full p-3 border border-gray-200 rounded-lg text-sm resize-none h-20 focus:border-sola-primary focus:ring-1 focus:ring-sola-primary focus:outline-none placeholder:text-gray-300"
+        />
+        {overlayText.trim() && (
+          <p className="mt-1.5 text-[10px] text-sola-primary font-medium">
+            {appMode === AppMode.VIDEO
+              ? 'Ce texte sera utilise comme narration dans la video'
+              : 'Ce texte sera integre visuellement dans l\'image'}
+          </p>
+        )}
+      </div>
 
       {/* 3. Mode & Execute */}
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">

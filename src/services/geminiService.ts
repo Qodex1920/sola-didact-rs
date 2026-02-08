@@ -80,12 +80,13 @@ export const editImageContext = async (
   category?: ProductCategory,
   productAnalysis?: ProductAnalysis | null,
   customContext?: string,
-  productDescription?: string
+  productDescription?: string,
+  overlayText?: string
 ): Promise<string> => {
   const ai = getAiClient();
 
   const fullPrompt = context && category
-    ? buildEditPrompt(context, category, productAnalysis ?? null, customContext, productDescription)
+    ? buildEditPrompt(context, category, productAnalysis ?? null, customContext, productDescription, overlayText)
     : `Place this exact product into the following scene: ${promptModifier}. The product must remain identical - same shape, colors, materials, proportions. Integrate natural shadows and reflections consistent with the scene lighting.`;
 
   const response = await ai.models.generateContent({
@@ -119,13 +120,14 @@ export const generateHighResImage = async (
   productAnalysis?: ProductAnalysis | null,
   base64Image?: string,
   customContext?: string,
-  productDescription?: string
+  productDescription?: string,
+  overlayText?: string
 ): Promise<string> => {
   await ensureApiKeySelection();
   const ai = getAiClient();
 
   const fullPrompt = context && category
-    ? buildGeneratePrompt(context, category, productAnalysis ?? null, customContext, productDescription)
+    ? buildGeneratePrompt(context, category, productAnalysis ?? null, customContext, productDescription, overlayText)
     : `Create a photorealistic image: ${promptModifier}`;
 
   const parts: any[] = [];
@@ -202,13 +204,14 @@ export const generateProductVideo = async (
   productAnalysis?: ProductAnalysis | null,
   customContext?: string,
   productDescription?: string,
+  overlayText?: string,
   videoQuality: VideoQuality = 'fast'
 ): Promise<string> => {
   await ensureApiKeySelection();
   const ai = getAiClient();
 
   const prompt = context && category
-    ? buildVideoPrompt(context, category, productAnalysis ?? null, customContext, productDescription)
+    ? buildVideoPrompt(context, category, productAnalysis ?? null, customContext, productDescription, overlayText)
     : `Cinematic slow motion product video. ${promptModifier}.`;
 
   const videoModel = videoQuality === 'pro' ? 'veo-3.1-generate-preview' : 'veo-3.1-fast-generate-preview';

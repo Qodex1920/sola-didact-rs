@@ -61,11 +61,16 @@ export const ContextGrid: React.FC<ContextGridProps> = ({
   onCustomContextChange,
   onToggleCustomContext,
 }) => {
+  // Guard against stale HMR state where customContext might still be a string
+  const ctx: CustomContextFields = typeof customContext === 'object' && customContext !== null
+    ? customContext
+    : { environment: '', surface: '', lighting: '', mood: '', props: '', extra: '' };
+
   const updateField = (key: keyof CustomContextFields, value: string) => {
-    onCustomContextChange({ ...customContext, [key]: value });
+    onCustomContextChange({ ...ctx, [key]: value });
   };
 
-  const filledCount = FIELD_CONFIG.filter(f => customContext[f.key].trim()).length;
+  const filledCount = FIELD_CONFIG.filter(f => (ctx[f.key] || '').trim()).length;
 
   return (
     <section>
@@ -139,7 +144,7 @@ export const ContextGrid: React.FC<ContextGridProps> = ({
                 </div>
                 <input
                   type="text"
-                  value={customContext[field.key]}
+                  value={ctx[field.key] || ''}
                   onChange={(e) => updateField(field.key, e.target.value)}
                   placeholder={field.placeholder}
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:border-sola-primary focus:ring-1 focus:ring-sola-primary focus:outline-none placeholder:text-gray-300"

@@ -49,9 +49,10 @@ export function useGeneration() {
       customContext?: string;
       currentAnalysis?: ProductAnalysis | null;
       productDescription?: string;
+      overlayText?: string;
       videoQuality?: VideoQuality;
     }) => {
-      const { appMode, uploadedImage, selectedContext, category, aspectRatio, proSize, customContext, currentAnalysis, productDescription, videoQuality } = params;
+      const { appMode, uploadedImage, selectedContext, category, aspectRatio, proSize, customContext, currentAnalysis, productDescription, overlayText, videoQuality } = params;
       const analysis = currentAnalysis ?? productAnalysis;
 
       setResult(null);
@@ -76,7 +77,7 @@ export function useGeneration() {
             setLoadingMessage('Recontextualisation en cours...');
             const editedUrl = await editImageContext(
               cleanBase64, selectedContext.promptModifier, aspectRatio,
-              selectedContext, category, analysis, customContext, productDescription
+              selectedContext, category, analysis, customContext, productDescription, overlayText
             );
             const asset: GeneratedAsset = { type: 'image', url: editedUrl };
             setResult(asset);
@@ -101,7 +102,7 @@ export function useGeneration() {
             const genUrl = await generateHighResImage(
               selectedContext.promptModifier, proSize, aspectRatio,
               selectedContext, category, analysis,
-              cleanBase64 || undefined, customContext, productDescription
+              cleanBase64 || undefined, customContext, productDescription, overlayText
             );
             const asset: GeneratedAsset = { type: 'image', url: genUrl };
             setResult(asset);
@@ -127,7 +128,7 @@ export function useGeneration() {
             const videoAspect = aspectRatio === '1:1' || aspectRatio === '4:5' ? '16:9' : aspectRatio;
             const videoUrl = await generateProductVideo(
               cleanBase64, selectedContext.promptModifier, videoAspect as '16:9' | '9:16',
-              selectedContext, category, analysis, customContext, productDescription, videoQuality
+              selectedContext, category, analysis, customContext, productDescription, overlayText, videoQuality
             );
             const asset: GeneratedAsset = { type: 'video', url: videoUrl };
             setResult(asset);
