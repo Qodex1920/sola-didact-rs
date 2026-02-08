@@ -1,0 +1,5 @@
+{
+  "name": "Sola Didact Studio",
+  "description": "Internal tool for generating consistent marketing assets for Sola Didact educational products using Gemini and Veo.",
+  "requestFramePermissions": []
+}
