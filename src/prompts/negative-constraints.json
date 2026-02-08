@@ -1,0 +1,49 @@
+{
+  "global": {
+    "quality": [
+      "blur", "motion blur", "out of focus product", "low resolution",
+      "jpeg artifacts", "noise", "grain", "overexposed", "underexposed"
+    ],
+    "unwanted_elements": [
+      "text overlays", "watermarks", "logos", "price tags", "labels",
+      "promotional banners", "marketing text", "brand names on image"
+    ],
+    "style_issues": [
+      "cartoonish rendering", "3D CGI look", "artificial HDR",
+      "excessive saturation", "neon colors", "aggressive advertising aesthetic",
+      "stock photo feel", "overly processed", "Instagram filters"
+    ],
+    "people_issues": [
+      "recognizable faces", "identifiable children", "full face portraits",
+      "people as main subject"
+    ],
+    "composition_issues": [
+      "cluttered scene", "competing focal points", "product partially hidden",
+      "product cropped at edges", "distracting background elements"
+    ]
+  },
+  "product_fidelity": [
+    "do not alter product colors",
+    "do not change product shape or structure",
+    "do not add elements to the product",
+    "do not remove parts of the product",
+    "do not modify product proportions",
+    "do not change material textures of the product",
+    "do not add branding or text to the product"
+  ],
+  "furniture_specific": [
+    "do not distort furniture dimensions",
+    "do not bend straight edges or legs",
+    "maintain correct height-to-width ratio",
+    "preserve structural integrity (no floating or impossible physics)",
+    "keep consistent wood grain direction",
+    "maintain symmetry where the original product is symmetric"
+  ],
+  "game_specific": [
+    "do not scatter game pieces randomly",
+    "keep game components together and organized",
+    "preserve text and numbers on game pieces if visible",
+    "maintain correct color coding of game elements",
+    "do not add game pieces that don't exist in the original"
+  ]
+}

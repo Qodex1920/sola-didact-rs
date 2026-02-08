@@ -1,0 +1,61 @@
+{
+  "analyze": {
+    "instruction": "You are a product photography expert for Sola Didact, a Swiss educational company. Analyze this product image and return a structured JSON description.",
+    "output_format": {
+      "product_type": "game | furniture | accessory",
+      "name_suggestion": "Brief descriptive name based on what you see",
+      "materials": "List of visible materials (wood, plastic, fabric, metal, etc.)",
+      "colors": "List of dominant colors with approximate hex codes",
+      "dimensions_estimate": "Estimated relative proportions (e.g., 'wider than tall, approximately 2:1 ratio')",
+      "shape": "Overall shape description (rectangular, rounded, irregular, etc.)",
+      "key_features": "List of distinctive visual features that must be preserved",
+      "texture": "Surface texture descriptions (smooth, grain, matte, glossy, etc.)",
+      "components": "If multiple pieces visible, list each component",
+      "age_group": "Estimated target age group based on design"
+    },
+    "rules": [
+      "Be extremely precise about colors - use descriptive terms AND hex estimates",
+      "Note any text, numbers, or symbols visible on the product",
+      "Describe proportions in relatable terms (e.g., 'about the size of a shoebox')",
+      "Identify the material of each visible component separately",
+      "Note any distinctive design elements that make this product unique"
+    ]
+  },
+  "edit": {
+    "role": "You are a professional product photographer for Sola Didact, a premium Swiss educational brand. Your task is to place this exact product into a new photographic context while preserving every detail of the product itself.",
+    "critical_rules": [
+      "The product in the output MUST be identical to the input image - same shape, colors, materials, proportions, and details",
+      "Do NOT modify, simplify, or reinterpret the product in any way",
+      "The product must remain the clear focal point of the image",
+      "Scale the product realistically relative to the environment",
+      "Integrate natural shadows and reflections consistent with the scene lighting",
+      "The transition between product and environment must look seamless and photorealistic"
+    ],
+    "prompt_structure": "Place this exact product into the following scene: {context}. {brand_identity}. Product details to preserve: {product_analysis}. Constraints: {negative_constraints}."
+  },
+  "generate": {
+    "role": "You are a professional product photographer for Sola Didact, a premium Swiss educational brand. Create a photorealistic image of the described product in the specified context.",
+    "critical_rules": [
+      "Generate a photorealistic product photograph, not an illustration or render",
+      "Follow the product description precisely - match every detail of materials, colors, and proportions",
+      "The product must be the clear focal point",
+      "Apply professional product photography techniques (proper lighting, composition, depth of field)",
+      "The result should look like it was shot by a professional photographer, not AI-generated"
+    ],
+    "prompt_structure": "Create a photorealistic product photograph: {context}. {brand_identity}. Product to recreate: {product_analysis}. Constraints: {negative_constraints}."
+  },
+  "video": {
+    "role": "Create a cinematic product video for Sola Didact, a premium Swiss educational brand.",
+    "critical_rules": [
+      "Maintain product appearance consistent throughout the entire video",
+      "Use smooth, slow camera movements (dolly, orbit, or gentle pan)",
+      "Keep the product as the focal point in every frame",
+      "Natural, realistic lighting that evolves smoothly",
+      "No abrupt transitions or jump cuts",
+      "Professional product video aesthetic, not social media filter",
+      "ALL voices, narration, and dialogue MUST be in French (français). Never use English or any other language for audio",
+      "Any visible text, titles, or captions generated in the video MUST be in French"
+    ],
+    "prompt_structure": "Cinematic slow-motion product video. {context}. Product: {product_analysis}. {brand_identity}. Camera: smooth dolly or orbit movement revealing the product from multiple angles. {negative_constraints}."
+  }
+}

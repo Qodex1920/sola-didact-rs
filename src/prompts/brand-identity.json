@@ -1,0 +1,38 @@
+{
+  "brand": "Sola Didact",
+  "origin": "Swiss educational company based in Martigny, 40+ years of expertise",
+  "atmosphere": "Educational, warm, natural, professional, Swiss/European aesthetic",
+  "lighting": {
+    "type": "Soft, realistic, natural light",
+    "direction": "Side or slightly above, mimicking window light",
+    "warmth": "Warm to neutral (4500K-5500K)",
+    "avoid": "Harsh shadows, artificial studio flash, neon lighting"
+  },
+  "color_palette": {
+    "primary_accent": "#C43333 (Brick Red)",
+    "background": "#F9F7F4 (Light Beige)",
+    "materials": ["Light wood (oak, birch)", "Soft textiles (cotton, linen)", "Natural fibers"],
+    "tones": "Warm neutrals, muted earth tones, soft pastels",
+    "avoid": "Excessive saturation, neon colors, cold blue tones"
+  },
+  "photography_style": {
+    "approach": "Authentic product photography, not advertising",
+    "realism": "Photorealistic rendering with natural imperfections",
+    "composition": "Clean, balanced, intentional negative space",
+    "lens": "50mm equivalent, natural perspective without distortion",
+    "depth_of_field": "Moderate to shallow, product always in sharp focus"
+  },
+  "people_rules": {
+    "faces": "Never show recognizable faces",
+    "allowed": "Hands interacting with product, silhouettes, soft blur on bodies",
+    "focus": "Always keep strict focus on the product, people are secondary context"
+  },
+  "strict_constraints": [
+    "Product must remain the absolute focal point in every image",
+    "No aggressive advertising style or promotional overlays",
+    "No artificial or CGI-looking rendering",
+    "No text, watermarks, or logos on the image",
+    "No excessive post-processing or HDR effects",
+    "Maintain authentic, credible environments"
+  ]
+}

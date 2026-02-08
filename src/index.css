@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sola-primary: #5dac3e;
+  --color-sola-dark: #3a383e;
+  --color-sola-wood: #D4C4A8;
+  --color-sola-text: #2D2D2D;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  @apply bg-gray-50 text-sola-text;
+}

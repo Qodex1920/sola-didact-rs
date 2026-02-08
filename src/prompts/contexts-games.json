@@ -1,0 +1,134 @@
+[
+  {
+    "id": "g1",
+    "label": "Table Bois (Catalogue)",
+    "description": "Jeu pose sur une table en bois clair, lumiere naturelle.",
+    "icon": "chair",
+    "environment": {
+      "setting": "Light wood table surface (oak or birch)",
+      "background": "Neutral beige or light grey wall, slightly out of focus",
+      "surface": "Clean wood grain visible, no clutter",
+      "props": "None or minimal (single small plant, subtle fabric napkin)"
+    },
+    "composition": {
+      "camera_angle": "Top-down or slightly angled (15-25 degrees from above)",
+      "framing": "Product centered with 20% negative space around edges",
+      "depth_of_field": "Moderate, entire product sharp, background softly blurred"
+    },
+    "lighting_override": {
+      "direction": "Natural side light from the left, soft window light",
+      "shadows": "Soft, natural shadows to the right of the product"
+    },
+    "mood": "Premium catalog photography, calm, educational, trustworthy"
+  },
+  {
+    "id": "g2",
+    "label": "En Situation",
+    "description": "Mains d'enfants ou d'adultes, interaction naturelle.",
+    "icon": "hands",
+    "environment": {
+      "setting": "Play area or table where the game is being actively used",
+      "background": "Soft, blurred domestic or classroom interior",
+      "surface": "Table, rug, or play mat",
+      "props": "Hands of children or adults interacting naturally with game pieces"
+    },
+    "composition": {
+      "camera_angle": "Close-up, slightly elevated (30 degrees), focused on hands and product",
+      "framing": "Tight crop showing interaction, product fills 60-70% of frame",
+      "depth_of_field": "Shallow, sharp focus on hands and product, background blurred"
+    },
+    "lighting_override": {
+      "direction": "Natural ambient light, warm indoor lighting",
+      "shadows": "Minimal, diffused"
+    },
+    "mood": "Authentic play session, joyful learning moment, candid photography feel"
+  },
+  {
+    "id": "g3",
+    "label": "Salle de Classe",
+    "description": "Tables d'ecole, arriere-plan flou.",
+    "icon": "school",
+    "environment": {
+      "setting": "European classroom with modern school furniture",
+      "background": "Blurred classroom elements: whiteboard, shelves, other desks",
+      "surface": "School desk (light wood or white laminate)",
+      "props": "Pencils, notebooks subtly visible in periphery, not competing with product"
+    },
+    "composition": {
+      "camera_angle": "Eye-level or slightly above (15 degrees), front-facing",
+      "framing": "Product on desk with classroom context visible behind",
+      "depth_of_field": "Shallow, product crisp, classroom background soft bokeh"
+    },
+    "lighting_override": {
+      "direction": "Overhead fluorescent mixed with window light, natural feel",
+      "shadows": "Even, institutional but warm"
+    },
+    "mood": "Professional, educational credibility, institutional trust"
+  },
+  {
+    "id": "g4",
+    "label": "Coin Lecture",
+    "description": "Tapis, coussins, ambiance chaleureuse.",
+    "icon": "teddy",
+    "environment": {
+      "setting": "Cozy reading corner with soft furnishings",
+      "background": "Low bookshelf, cushions, warm-toned wall",
+      "surface": "Soft rug, fabric play mat, or beside cushions",
+      "props": "Cushions, a few children's books, plush toy partially visible"
+    },
+    "composition": {
+      "camera_angle": "Low angle (ground level or 10 degrees above), intimate perspective",
+      "framing": "Product nestled in cozy setting, warm framing",
+      "depth_of_field": "Moderate, product sharp, surrounding softness"
+    },
+    "lighting_override": {
+      "direction": "Warm golden hour light from side window",
+      "shadows": "Long, warm, inviting shadows"
+    },
+    "mood": "Warmth, comfort, safe learning environment, hygge feeling"
+  },
+  {
+    "id": "g5",
+    "label": "Mise en Scene Creative",
+    "description": "Decor leger inspire du theme.",
+    "icon": "palette",
+    "environment": {
+      "setting": "Styled flat-lay or arranged scene related to the game's educational theme",
+      "background": "Clean surface (marble, linen fabric, colored paper)",
+      "surface": "Flat surface appropriate for overhead or angled composition",
+      "props": "Light decorative elements related to the game's theme (leaves for nature game, numbers for math game, letters for language game)"
+    },
+    "composition": {
+      "camera_angle": "Top-down flat-lay or 45-degree styled angle",
+      "framing": "Balanced arrangement, product as hero with supporting props",
+      "depth_of_field": "Sharp throughout for flat-lay, selective for angled shots"
+    },
+    "lighting_override": {
+      "direction": "Even, diffused overhead light or large softbox from above",
+      "shadows": "Minimal, clean shadows"
+    },
+    "mood": "Creative, editorial, Instagram-worthy, educational and credible (not fantasy)"
+  },
+  {
+    "id": "g6",
+    "label": "Hero Shot (Social)",
+    "description": "Fond propre, esthetique pour Instagram.",
+    "icon": "camera",
+    "environment": {
+      "setting": "Minimalist studio-style setting",
+      "background": "Solid soft beige (#F9F7F4) or clean white, seamless",
+      "surface": "Clean, flat surface matching background tone",
+      "props": "None. Product only."
+    },
+    "composition": {
+      "camera_angle": "Front-facing, slightly elevated (10-15 degrees)",
+      "framing": "Product centered, high aesthetic value, perfect for Instagram cover or Reel thumbnail",
+      "depth_of_field": "Sharp focus throughout, clean edges"
+    },
+    "lighting_override": {
+      "direction": "Soft key light from upper left, gentle fill from right",
+      "shadows": "Clean, defined but soft shadow beneath product"
+    },
+    "mood": "High aesthetic, minimalist, social media ready, premium brand feel"
+  }
+]

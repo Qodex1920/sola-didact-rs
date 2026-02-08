@@ -1,0 +1,140 @@
+[
+  {
+    "id": "f1",
+    "label": "Classe Moderne",
+    "description": "Environnement scolaire realiste.",
+    "icon": "school",
+    "environment": {
+      "setting": "Modern European classroom with contemporary furniture",
+      "background": "Educational posters, whiteboard, windows with natural light",
+      "surface": "Institutional flooring (wood or light vinyl)",
+      "props": "Other school furniture, storage units, educational materials on shelves"
+    },
+    "composition": {
+      "camera_angle": "Eye-level or slightly above (20 degrees), three-quarter view showing furniture dimensions",
+      "framing": "Furniture piece in context, showing scale relative to room and other objects",
+      "depth_of_field": "Moderate, furniture sharp, room context present but softer"
+    },
+    "lighting_override": {
+      "direction": "Large window natural light combined with overhead institutional lighting",
+      "shadows": "Natural, even distribution"
+    },
+    "mood": "Professional, institutional, modern education environment",
+    "proportion_notes": "Show furniture at realistic scale relative to standard classroom dimensions. Include reference objects (door frame, desk, chair) for size context."
+  },
+  {
+    "id": "f2",
+    "label": "Salle de Jeux",
+    "description": "Couleurs douces, design enfantin.",
+    "icon": "dice",
+    "environment": {
+      "setting": "Children's playroom with soft, child-friendly design",
+      "background": "Pastel walls, playful but tasteful decor, storage bins",
+      "surface": "Soft play mat or clean wooden floor",
+      "props": "Toys, cushions, other child furniture, brick red accents in decor"
+    },
+    "composition": {
+      "camera_angle": "Child's eye-level (low angle, 60-80cm height), showing furniture as children see it",
+      "framing": "Furniture as part of play environment, showing functionality",
+      "depth_of_field": "Moderate, furniture in focus, playful context visible"
+    },
+    "lighting_override": {
+      "direction": "Bright, warm natural light from windows",
+      "shadows": "Soft, playful"
+    },
+    "mood": "Playful, design-oriented, child-friendly, safe environment",
+    "proportion_notes": "Show furniture at child-appropriate scale. If possible, suggest child-sized proportions by including toys or child-height references."
+  },
+  {
+    "id": "f3",
+    "label": "Coin Calme",
+    "description": "Poufs, lumiere chaude.",
+    "icon": "quiet",
+    "environment": {
+      "setting": "Quiet corner with comfortable seating and warm atmosphere",
+      "background": "Warm-toned wall, low bookshelf, indoor plant",
+      "surface": "Carpet or soft flooring",
+      "props": "Bean bags, floor cushions, low shelves with books, soft lighting elements"
+    },
+    "composition": {
+      "camera_angle": "Low angle (ground level to 30 degrees), intimate and inviting",
+      "framing": "Furniture as anchor piece of the calm corner, surrounded by comfort elements",
+      "depth_of_field": "Shallow, furniture sharp, cozy surroundings gently blurred"
+    },
+    "lighting_override": {
+      "direction": "Golden hour window light, warm and directional",
+      "shadows": "Long, warm shadows creating depth"
+    },
+    "mood": "Relaxing, safe, nurturing atmosphere",
+    "proportion_notes": "Ensure furniture appears stable, grounded, and appropriately sized for the quiet corner setting."
+  },
+  {
+    "id": "f4",
+    "label": "Bureau Enseignant",
+    "description": "Fonctionnalite adulte.",
+    "icon": "briefcase",
+    "environment": {
+      "setting": "Teacher's workspace or school office",
+      "background": "Office elements: filing cabinet, bookshelf, diplomas or educational materials",
+      "surface": "Office or classroom floor",
+      "props": "Desk organizer, laptop or notebook, coffee mug, professional items"
+    },
+    "composition": {
+      "camera_angle": "Eye-level (adult height), straight-on or slight three-quarter angle",
+      "framing": "Furniture in professional workspace context, showing adult-scale functionality",
+      "depth_of_field": "Moderate, sharp furniture with soft office background"
+    },
+    "lighting_override": {
+      "direction": "Office window light combined with desk lamp warmth",
+      "shadows": "Professional, even"
+    },
+    "mood": "Professional, functional, adult workspace, organized",
+    "proportion_notes": "Show furniture at adult scale. Include adult-sized references (office chair, standard desk) to establish correct proportions."
+  },
+  {
+    "id": "f5",
+    "label": "Creche",
+    "description": "Douceur, securite, nature.",
+    "icon": "baby",
+    "environment": {
+      "setting": "Nursery or daycare setting with very gentle, safe atmosphere",
+      "background": "Soft pastel walls, natural wood elements, safety-conscious design",
+      "surface": "Soft, safe flooring (cork, rubber play mat, carpet)",
+      "props": "Natural materials (wooden toys, cotton items), safety elements, small plants"
+    },
+    "composition": {
+      "camera_angle": "Low angle (child/toddler height, 30-50cm), showing furniture from small child perspective",
+      "framing": "Furniture as safe, welcoming element in nurturing space",
+      "depth_of_field": "Soft overall, dreamy quality, furniture in focus"
+    },
+    "lighting_override": {
+      "direction": "Very soft, diffused natural light, no harsh contrasts",
+      "shadows": "Minimal, very soft"
+    },
+    "mood": "Gentle, safe, welcoming, nurturing",
+    "proportion_notes": "Furniture must appear safe and correctly sized for toddlers/infants. Show rounded edges, stable base, and appropriate height for very young children."
+  },
+  {
+    "id": "f6",
+    "label": "Minimaliste",
+    "description": "Fond epure, focus design.",
+    "icon": "sparkles",
+    "environment": {
+      "setting": "Minimalist studio environment",
+      "background": "Solid Sola beige (#F9F7F4) or clean white, seamless backdrop",
+      "surface": "Clean floor matching background or slight contrast",
+      "props": "None. Furniture piece only."
+    },
+    "composition": {
+      "camera_angle": "Three-quarter view at eye-level, showing depth and proportions clearly",
+      "framing": "Furniture centered with generous negative space, focus purely on form and design",
+      "depth_of_field": "Sharp throughout, showcasing every design detail"
+    },
+    "lighting_override": {
+      "direction": "Studio lighting: key light from 45 degrees left, fill from right, rim light for edge definition",
+      "shadows": "Clean, defined shadow beneath furniture for grounding"
+    },
+    "mood": "High-end design showcase, premium, architectural",
+    "proportion_notes": "With no environmental references, ensure furniture proportions are absolutely accurate. Maintain correct height-to-width-to-depth ratios."
+  }
+]
