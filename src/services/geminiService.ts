@@ -44,7 +44,22 @@ export const analyzeProduct = async (base64Image: string): Promise<ProductAnalys
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
       const parsed = JSON.parse(jsonMatch[0]);
-      return { ...parsed, raw_description: text } as ProductAnalysis;
+      // Normalize all fields to strings — Gemini sometimes returns objects/arrays
+      const normalized: Record<string, string> = {};
+      for (const [key, value] of Object.entries(parsed)) {
+        if (typeof value === 'string') {
+          normalized[key] = value;
+        } else if (Array.isArray(value)) {
+          normalized[key] = value
+            .map((v) => (typeof v === 'object' && v !== null ? Object.values(v).join(' ') : String(v)))
+            .join(', ');
+        } else if (typeof value === 'object' && value !== null) {
+          normalized[key] = Object.values(value).join(' ');
+        } else {
+          normalized[key] = String(value ?? '');
+        }
+      }
+      return { ...normalized, raw_description: text } as ProductAnalysis;
     }
   } catch {
     // Fallback
@@ -81,24 +96,34 @@ export const editImageContext = async (
   productAnalysis?: ProductAnalysis | null,
   customContext?: string,
   productDescription?: string,
-  overlayText?: string
+  overlayText?: string,
+  additionalImages?: string[]
 ): Promise<string> => {
   const ai = getAiClient();
+  const multiProduct = (additionalImages?.length ?? 0) > 0;
 
   const fullPrompt = context && category
-    ? buildEditPrompt(context, category, productAnalysis ?? null, customContext, productDescription, overlayText)
+    ? buildEditPrompt(context, category, productAnalysis ?? null, customContext, productDescription, overlayText, multiProduct)
     : `Place this exact product into the following scene: ${promptModifier}. The product must remain identical - same shape, colors, materials, proportions. Integrate natural shadows and reflections consistent with the scene lighting.`;
+
+  const parts: any[] = [
+    { inlineData: { mimeType: 'image/jpeg', data: base64Image } },
+  ];
+  if (additionalImages) {
+    for (const img of additionalImages) {
+      parts.push({ inlineData: { mimeType: 'image/jpeg', data: img } });
+    }
+  }
+  parts.push({ text: fullPrompt });
 
   const response = await ai.models.generateContent({
     model: 'gemini-2.5-flash-image',
-    contents: {
-      parts: [
-        { inlineData: { mimeType: 'image/jpeg', data: base64Image } },
-        { text: fullPrompt },
-      ],
-    },
+    contents: { parts },
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
+      imageConfig: {
+        aspectRatio,
+      },
     },
   });
 
@@ -121,18 +146,25 @@ export const generateHighResImage = async (
   base64Image?: string,
   customContext?: string,
   productDescription?: string,
-  overlayText?: string
+  overlayText?: string,
+  additionalImages?: string[]
 ): Promise<string> => {
   await ensureApiKeySelection();
   const ai = getAiClient();
+  const multiProduct = (additionalImages?.length ?? 0) > 0;
 
   const fullPrompt = context && category
-    ? buildGeneratePrompt(context, category, productAnalysis ?? null, customContext, productDescription, overlayText)
+    ? buildGeneratePrompt(context, category, productAnalysis ?? null, customContext, productDescription, overlayText, multiProduct)
     : `Create a photorealistic image: ${promptModifier}`;
 
   const parts: any[] = [];
   if (base64Image) {
     parts.push({ inlineData: { mimeType: 'image/jpeg', data: base64Image } });
+  }
+  if (additionalImages) {
+    for (const img of additionalImages) {
+      parts.push({ inlineData: { mimeType: 'image/jpeg', data: img } });
+    }
   }
   parts.push({ text: fullPrompt });
 
@@ -141,6 +173,10 @@ export const generateHighResImage = async (
     contents: { parts },
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
+      imageConfig: {
+        aspectRatio,
+        imageSize: size,
+      },
     },
   });
 
@@ -205,19 +241,37 @@ export const generateProductVideo = async (
   customContext?: string,
   productDescription?: string,
   overlayText?: string,
-  videoQuality: VideoQuality = 'fast'
+  videoQuality: VideoQuality = 'fast',
+  additionalImages?: string[],
+  durationSeconds?: number
 ): Promise<string> => {
   await ensureApiKeySelection();
   const ai = getAiClient();
+  const multiProduct = (additionalImages?.length ?? 0) > 0;
 
   const prompt = context && category
-    ? buildVideoPrompt(context, category, productAnalysis ?? null, customContext, productDescription, overlayText)
+    ? buildVideoPrompt(context, category, productAnalysis ?? null, customContext, productDescription, overlayText, multiProduct)
     : `Cinematic slow motion product video. ${promptModifier}.`;
 
   const videoModel = videoQuality === 'pro' ? 'veo-3.1-generate-preview' : 'veo-3.1-fast-generate-preview';
 
   // Pre-crop input image to match target aspect ratio (Veo works better this way)
   const croppedImage = await cropImageToAspectRatio(base64Image, aspectRatio);
+
+  const videoConfig: any = {
+    numberOfVideos: 1,
+    aspectRatio,
+    resolution: '720p',
+  };
+  if (durationSeconds) {
+    videoConfig.durationSeconds = durationSeconds;
+  }
+  if (additionalImages && additionalImages.length > 0) {
+    videoConfig.referenceImages = additionalImages.map((img) => ({
+      image: { imageBytes: img, mimeType: 'image/jpeg' },
+      referenceType: 'ASSET',
+    }));
+  }
 
   let operation = await ai.models.generateVideos({
     model: videoModel,
@@ -226,11 +280,7 @@ export const generateProductVideo = async (
       imageBytes: croppedImage,
       mimeType: 'image/jpeg',
     },
-    config: {
-      numberOfVideos: 1,
-      aspectRatio,
-      resolution: '720p',
-    },
+    config: videoConfig,
   });
 
   while (!operation.done) {

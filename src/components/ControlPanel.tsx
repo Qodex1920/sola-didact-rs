@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppMode, ProductCategory, type ImageSize, type AspectRatio, type ProductAnalysis, type VideoQuality } from '@/types';
+import { AppMode, ProductCategory, type ImageSize, type AspectRatio, type ProductAnalysis, type VideoQuality, type VideoDuration } from '@/types';
 import { ImageUploader } from './ImageUploader';
 import { AspectRatioSelector } from './AspectRatioSelector';
 
@@ -12,13 +12,15 @@ interface ControlPanelProps {
   onProSizeChange: (size: ImageSize) => void;
   aspectRatio: AspectRatio;
   onAspectRatioChange: (ratio: AspectRatio) => void;
+  uploadedImages: string[];
   uploadedImage: string | null;
   isDragging: boolean;
   onFileSelect: (file: File) => void;
   onDrop: (e: React.DragEvent) => void;
   onDragOver: (e: React.DragEvent) => void;
   onDragLeave: (e: React.DragEvent) => void;
-  onClearImage: () => void;
+  onRemoveImage: (index: number) => void;
+  onClearAllImages: () => void;
   onAnalyze: () => void;
   onGenerate: () => void;
   isLoading: boolean;
@@ -31,6 +33,8 @@ interface ControlPanelProps {
   onOverlayTextChange: (value: string) => void;
   videoQuality: VideoQuality;
   onVideoQualityChange: (quality: VideoQuality) => void;
+  videoDuration: VideoDuration;
+  onVideoDurationChange: (duration: VideoDuration) => void;
 }
 
 export const ControlPanel: React.FC<ControlPanelProps> = ({
@@ -42,13 +46,15 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   onProSizeChange,
   aspectRatio,
   onAspectRatioChange,
+  uploadedImages,
   uploadedImage,
   isDragging,
   onFileSelect,
   onDrop,
   onDragOver,
   onDragLeave,
-  onClearImage,
+  onRemoveImage,
+  onClearAllImages,
   onAnalyze,
   onGenerate,
   isLoading,
@@ -61,6 +67,8 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   onOverlayTextChange,
   videoQuality,
   onVideoQualityChange,
+  videoDuration,
+  onVideoDurationChange,
 }) => {
   return (
     <div className="space-y-6">
@@ -91,13 +99,14 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
         <h2 className="text-lg font-bold mb-4">2. Image Source</h2>
         <ImageUploader
-          currentImage={uploadedImage}
+          images={uploadedImages}
           isDragging={isDragging}
           onFileSelect={onFileSelect}
           onDrop={onDrop}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
-          onClear={onClearImage}
+          onRemoveImage={onRemoveImage}
+          onClearAll={onClearAllImages}
         />
 
         {/* Auto-analysis status */}
@@ -262,32 +271,55 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         )}
 
         {appMode === AppMode.VIDEO && (
-          <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-            <label className="block text-xs font-semibold text-gray-500 mb-2 uppercase">
-              Qualite video
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              {([
-                { value: 'fast' as VideoQuality, label: 'Fast', desc: 'Rapide, preview' },
-                { value: 'pro' as VideoQuality, label: 'Pro', desc: 'Haute qualite + audio' },
-              ]).map((opt) => (
-                <button
-                  key={opt.value}
-                  onClick={() => onVideoQualityChange(opt.value)}
-                  className={`p-2 rounded-lg border text-center transition-all ${
-                    videoQuality === opt.value
-                      ? 'border-sola-primary bg-sola-primary/10 ring-1 ring-sola-primary'
-                      : 'border-gray-200 bg-white hover:border-sola-primary/50'
-                  }`}
-                >
-                  <span className={`block text-sm font-bold ${videoQuality === opt.value ? 'text-sola-primary' : 'text-gray-700'}`}>
-                    {opt.label}
-                  </span>
-                  <span className="block text-[10px] text-gray-400 mt-0.5">{opt.desc}</span>
-                </button>
-              ))}
+          <>
+            <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+              <label className="block text-xs font-semibold text-gray-500 mb-2 uppercase">
+                Qualite video
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {([
+                  { value: 'fast' as VideoQuality, label: 'Fast', desc: 'Rapide, preview' },
+                  { value: 'pro' as VideoQuality, label: 'Pro', desc: 'Haute qualite + audio' },
+                ]).map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => onVideoQualityChange(opt.value)}
+                    className={`p-2 rounded-lg border text-center transition-all ${
+                      videoQuality === opt.value
+                        ? 'border-sola-primary bg-sola-primary/10 ring-1 ring-sola-primary'
+                        : 'border-gray-200 bg-white hover:border-sola-primary/50'
+                    }`}
+                  >
+                    <span className={`block text-sm font-bold ${videoQuality === opt.value ? 'text-sola-primary' : 'text-gray-700'}`}>
+                      {opt.label}
+                    </span>
+                    <span className="block text-[10px] text-gray-400 mt-0.5">{opt.desc}</span>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+
+            <div className="mt-3 p-3 bg-gray-50 rounded-lg">
+              <label className="block text-xs font-semibold text-gray-500 mb-2 uppercase">
+                Duree video
+              </label>
+              <div className="flex gap-2">
+                {([4, 6, 8] as VideoDuration[]).map((d) => (
+                  <button
+                    key={d}
+                    onClick={() => onVideoDurationChange(d)}
+                    className={`flex-1 py-1.5 text-xs rounded border font-medium transition-all ${
+                      videoDuration === d
+                        ? 'bg-sola-dark text-white border-sola-dark'
+                        : 'bg-white border-gray-300 hover:border-sola-dark/50'
+                    }`}
+                  >
+                    {d}s
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
         )}
 
         {/* Aspect Ratio */}

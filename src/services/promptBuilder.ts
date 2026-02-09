@@ -118,12 +118,17 @@ export function buildEditPrompt(
   productAnalysis: ProductAnalysis | null,
   customContext?: string,
   productDescription?: string,
-  overlayText?: string
+  overlayText?: string,
+  multiProduct?: boolean
 ): string {
   const t = promptTemplates.edit;
   const contextSection = customContext
     ? `Custom scene: ${customContext}`
     : buildContextSection(context);
+
+  const multiProductSection = multiProduct
+    ? ['', '--- MULTI-PRODUCT COMPOSITION ---', 'Create a harmonious composition featuring ALL provided products together in the same scene. Each product must be clearly visible and faithfully represented.', '']
+    : [];
 
   return [
     t.role,
@@ -131,6 +136,7 @@ export function buildEditPrompt(
     'CRITICAL RULES:',
     ...t.critical_rules.map((r: string) => `- ${r}`),
     '',
+    ...multiProductSection,
     '--- SCENE ---',
     contextSection,
     '',
@@ -152,12 +158,17 @@ export function buildGeneratePrompt(
   productAnalysis: ProductAnalysis | null,
   customContext?: string,
   productDescription?: string,
-  overlayText?: string
+  overlayText?: string,
+  multiProduct?: boolean
 ): string {
   const t = promptTemplates.generate;
   const contextSection = customContext
     ? `Custom scene: ${customContext}`
     : buildContextSection(context);
+
+  const multiProductSection = multiProduct
+    ? ['', '--- MULTI-PRODUCT COMPOSITION ---', 'Create a harmonious composition featuring ALL provided products together in the same scene. Each product must be clearly visible and faithfully represented.', '']
+    : [];
 
   return [
     t.role,
@@ -165,6 +176,7 @@ export function buildGeneratePrompt(
     'CRITICAL RULES:',
     ...t.critical_rules.map((r: string) => `- ${r}`),
     '',
+    ...multiProductSection,
     '--- SCENE ---',
     contextSection,
     '',
@@ -186,12 +198,17 @@ export function buildVideoPrompt(
   productAnalysis: ProductAnalysis | null,
   customContext?: string,
   productDescription?: string,
-  overlayText?: string
+  overlayText?: string,
+  multiProduct?: boolean
 ): string {
   const t = promptTemplates.video;
   const contextSection = customContext
     ? `Custom scene: ${customContext}`
     : buildContextSection(context);
+
+  const multiProductSection = multiProduct
+    ? ['', '--- MULTI-PRODUCT SEQUENCE ---', 'Present each product one after another with smooth, elegant cinematic transitions. Each product should have a dedicated moment in focus before transitioning to the next.', '']
+    : [];
 
   return [
     t.role,
@@ -199,6 +216,7 @@ export function buildVideoPrompt(
     'CRITICAL RULES:',
     ...t.critical_rules.map((r: string) => `- ${r}`),
     '',
+    ...multiProductSection,
     '--- SCENE ---',
     contextSection,
     '',

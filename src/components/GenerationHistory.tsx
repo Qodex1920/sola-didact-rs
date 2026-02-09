@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import type { HistoryEntry, GeneratedAsset } from '@/types';
-import { getHistory, deleteFromHistory, clearHistory } from '@/lib/storage';
+import React, { useState, useEffect, useRef } from "react";
+import type { HistoryEntry, GeneratedAsset } from "@/types";
+import { getHistory, deleteFromHistory, clearHistory } from "@/lib/storage";
+import { getMediaBlob } from "@/lib/videoStorage";
 
 interface GenerationHistoryProps {
   onSelect: (asset: GeneratedAsset) => void;
@@ -19,23 +20,91 @@ function timeAgo(timestamp: number): string {
 }
 
 const MODE_LABELS: Record<string, string> = {
-  EDIT: 'Mise en situation',
-  GENERATE: 'Création Pro',
-  VIDEO: 'Vidéo',
-  ANALYZE: 'Analyse',
+  EDIT: "Mise en situation",
+  GENERATE: "Création Pro",
+  VIDEO: "Vidéo",
+  ANALYZE: "Analyse",
 };
 
-export const GenerationHistory: React.FC<GenerationHistoryProps> = ({ onSelect, refreshKey }) => {
+export const GenerationHistory: React.FC<GenerationHistoryProps> = ({
+  onSelect,
+  refreshKey,
+}) => {
   const [entries, setEntries] = useState<HistoryEntry[]>([]);
+  const objectUrlsRef = useRef<string[]>([]);
 
   useEffect(() => {
-    setEntries(getHistory());
+    let cancelled = false;
+
+    // Revoke previous object URLs to free memory
+    for (const url of objectUrlsRef.current) {
+      URL.revokeObjectURL(url);
+    }
+    objectUrlsRef.current = [];
+
+    const load = async () => {
+      const raw = getHistory();
+      const resolved = await Promise.all(
+        raw.map(async (entry) => {
+          // New format: blob stored in IndexedDB
+          if (entry.asset.url === "idb:stored") {
+            try {
+              const blob = await getMediaBlob(entry.id);
+              if (blob) {
+                const objUrl = URL.createObjectURL(blob);
+                objectUrlsRef.current.push(objUrl);
+                return {
+                  ...entry,
+                  asset: { ...entry.asset, url: objUrl },
+                };
+              }
+            } catch {}
+            // Blob not found — show thumbnail as fallback
+            return entry;
+          }
+          // Legacy: video with expired blob: URL — try IndexedDB
+          if (
+            entry.asset.type === "video" &&
+            entry.asset.url.startsWith("blob:")
+          ) {
+            try {
+              const blob = await getMediaBlob(entry.id);
+              if (blob) {
+                const objUrl = URL.createObjectURL(blob);
+                objectUrlsRef.current.push(objUrl);
+                return {
+                  ...entry,
+                  asset: { ...entry.asset, url: objUrl },
+                };
+              }
+            } catch {}
+          }
+          // Legacy: inline data URL — still works as-is
+          return entry;
+        }),
+      );
+      if (!cancelled) setEntries(resolved);
+    };
+    load();
+
+    return () => {
+      cancelled = true;
+    };
   }, [refreshKey]);
+
+  // Cleanup object URLs on unmount
+  useEffect(() => {
+    return () => {
+      for (const url of objectUrlsRef.current) {
+        URL.revokeObjectURL(url);
+      }
+    };
+  }, []);
 
   const handleDelete = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
     deleteFromHistory(id);
-    setEntries(getHistory());
+    setEntries((prev) => prev.filter((entry) => entry.id !== id));
   };
 
   const handleClearAll = () => {
@@ -72,7 +141,7 @@ export const GenerationHistory: React.FC<GenerationHistoryProps> = ({ onSelect, 
               />
             ) : (
               <div className="w-full aspect-square bg-gray-100 flex items-center justify-center text-gray-400 text-2xl">
-                {entry.asset.type === 'video' ? '🎬' : '🖼'}
+                {entry.asset.type === "video" ? "🎬" : "🖼"}
               </div>
             )}
             <div className="p-1.5">
@@ -80,7 +149,8 @@ export const GenerationHistory: React.FC<GenerationHistoryProps> = ({ onSelect, 
                 {entry.contextLabel}
               </p>
               <p className="text-[9px] text-gray-400">
-                {MODE_LABELS[entry.mode] || entry.mode} · {timeAgo(entry.createdAt)}
+                {MODE_LABELS[entry.mode] || entry.mode} ·{" "}
+                {timeAgo(entry.createdAt)}
               </p>
             </div>
 

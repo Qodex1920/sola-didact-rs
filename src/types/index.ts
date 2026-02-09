@@ -44,6 +44,8 @@ export type AspectRatio = '1:1' | '4:5' | '16:9' | '9:16';
 
 export type VideoQuality = 'fast' | 'pro';
 
+export type VideoDuration = 4 | 6 | 8;
+
 export interface CustomContextFields {
   environment: string;
   surface: string;

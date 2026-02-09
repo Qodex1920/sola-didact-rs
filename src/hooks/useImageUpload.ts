@@ -1,11 +1,15 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { toast } from 'sonner';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_IMAGES = 3;
 
 export function useImageUpload() {
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
+
+  const uploadedImage = useMemo(() => uploadedImages[0] ?? null, [uploadedImages]);
+  const additionalImages = useMemo(() => uploadedImages.slice(1), [uploadedImages]);
 
   const handleFileSelect = useCallback((file: File) => {
     if (!file.type.startsWith('image/')) {
@@ -19,7 +23,13 @@ export function useImageUpload() {
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      setUploadedImage(reader.result as string);
+      setUploadedImages((prev) => {
+        if (prev.length >= MAX_IMAGES) {
+          toast.error(`Maximum ${MAX_IMAGES} images.`);
+          return prev;
+        }
+        return [...prev, reader.result as string];
+      });
     };
     reader.readAsDataURL(file);
   }, []);
@@ -44,18 +54,25 @@ export function useImageUpload() {
     setIsDragging(false);
   }, []);
 
-  const clearImage = useCallback(() => {
-    setUploadedImage(null);
+  const removeImage = useCallback((index: number) => {
+    setUploadedImages((prev) => prev.filter((_, i) => i !== index));
+  }, []);
+
+  const clearImages = useCallback(() => {
+    setUploadedImages([]);
   }, []);
 
   return {
+    uploadedImages,
     uploadedImage,
+    additionalImages,
     isDragging,
     handleFileSelect,
     handleDrop,
     handleDragOver,
     handleDragLeave,
-    clearImage,
-    setUploadedImage,
+    removeImage,
+    clearImages,
+    clearImage: clearImages,
   };
 }

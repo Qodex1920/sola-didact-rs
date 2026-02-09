@@ -4,33 +4,35 @@
     "label": "Table Bois (Catalogue)",
     "description": "Jeu pose sur une table en bois clair, lumiere naturelle.",
     "icon": "chair",
+    "creativity": "stable",
     "environment": {
       "setting": "Light wood table surface (oak or birch)",
-      "background": "Neutral beige or light grey wall, slightly out of focus",
+      "background": "Neutral warm background, slightly out of focus",
       "surface": "Clean wood grain visible, no clutter",
-      "props": "None or minimal (single small plant, subtle fabric napkin)"
+      "props": "None or minimal"
     },
     "composition": {
       "camera_angle": "Top-down or slightly angled (15-25 degrees from above)",
-      "framing": "Product centered with 20% negative space around edges",
+      "framing": "Product centered with generous negative space around edges",
       "depth_of_field": "Moderate, entire product sharp, background softly blurred"
     },
     "lighting_override": {
-      "direction": "Natural side light from the left, soft window light",
-      "shadows": "Soft, natural shadows to the right of the product"
+      "direction": "Soft natural side light from a window",
+      "shadows": "Gentle shadows to the right of the product"
     },
     "mood": "Premium catalog photography, calm, educational, trustworthy"
   },
   {
     "id": "g2",
     "label": "En Situation",
-    "description": "Mains d'enfants ou d'adultes, interaction naturelle.",
+    "description": "Mains d'enfants ou d'adultes jouant avec le jeu.",
     "icon": "hands",
+    "creativity": "adaptive",
     "environment": {
       "setting": "Play area or table where the game is being actively used",
       "background": "Soft, blurred domestic or classroom interior",
-      "surface": "Table, rug, or play mat",
-      "props": "Hands of children or adults interacting naturally with game pieces"
+      "surface": "Varies naturally: wooden table, play mat, or soft rug",
+      "props": "Hands interacting — adapt to game type: stacking, sorting, matching, building, reading"
     },
     "composition": {
       "camera_angle": "Close-up, slightly elevated (30 degrees), focused on hands and product",
@@ -41,26 +43,28 @@
       "direction": "Natural ambient light, warm indoor lighting",
       "shadows": "Minimal, diffused"
     },
-    "mood": "Authentic play session, joyful learning moment, candid photography feel"
+    "mood": "Authentic play session, candid feel, joyful learning moment",
+    "variation_notes": "Interaction style adapts to the game type. Surface and background details vary naturally."
   },
   {
     "id": "g3",
     "label": "Salle de Classe",
     "description": "Tables d'ecole, arriere-plan flou.",
     "icon": "school",
+    "creativity": "stable",
     "environment": {
-      "setting": "European classroom with modern school furniture",
-      "background": "Blurred classroom elements: whiteboard, shelves, other desks",
+      "setting": "Modern European classroom with school furniture",
+      "background": "Blurred: whiteboard, shelves, other desks, educational posters",
       "surface": "School desk (light wood or white laminate)",
-      "props": "Pencils, notebooks subtly visible in periphery, not competing with product"
+      "props": "Pencils, notebooks subtly visible near product, not competing"
     },
     "composition": {
-      "camera_angle": "Eye-level or slightly above (15 degrees), front-facing",
+      "camera_angle": "Eye-level or slightly above, front-facing",
       "framing": "Product on desk with classroom context visible behind",
       "depth_of_field": "Shallow, product crisp, classroom background soft bokeh"
     },
     "lighting_override": {
-      "direction": "Overhead fluorescent mixed with window light, natural feel",
+      "direction": "Natural daylight from large windows mixed with soft overhead light",
       "shadows": "Even, institutional but warm"
     },
     "mood": "Professional, educational credibility, institutional trust"
@@ -70,14 +74,15 @@
     "label": "Coin Lecture",
     "description": "Tapis, coussins, ambiance chaleureuse.",
     "icon": "teddy",
+    "creativity": "semi-stable",
     "environment": {
       "setting": "Cozy reading corner with soft furnishings",
       "background": "Low bookshelf, cushions, warm-toned wall",
       "surface": "Soft rug, fabric play mat, or beside cushions",
-      "props": "Cushions, a few children's books, plush toy partially visible"
+      "props": "Cushions, children's books, plush toy partially visible"
     },
     "composition": {
-      "camera_angle": "Low angle (ground level or 10 degrees above), intimate perspective",
+      "camera_angle": "Low angle (ground level or near), intimate perspective",
       "framing": "Product nestled in cozy setting, warm framing",
       "depth_of_field": "Moderate, product sharp, surrounding softness"
     },
@@ -85,18 +90,20 @@
       "direction": "Warm golden hour light from side window",
       "shadows": "Long, warm, inviting shadows"
     },
-    "mood": "Warmth, comfort, safe learning environment, hygge feeling"
+    "mood": "Warmth, comfort, safe learning environment, hygge feeling",
+    "variation_notes": "Cushion colors, book spines, and fabric textures can vary slightly."
   },
   {
     "id": "g5",
     "label": "Mise en Scene Creative",
-    "description": "Decor leger inspire du theme.",
+    "description": "Decor adapte au theme du jeu.",
     "icon": "palette",
+    "creativity": "highly-adaptive",
     "environment": {
-      "setting": "Styled flat-lay or arranged scene related to the game's educational theme",
-      "background": "Clean surface (marble, linen fabric, colored paper)",
+      "setting": "Styled flat-lay or arranged scene adapted to the game's educational theme",
+      "background": "Clean surface: linen, light wood, or textured paper — chosen to complement the product's palette",
       "surface": "Flat surface appropriate for overhead or angled composition",
-      "props": "Light decorative elements related to the game's theme (leaves for nature game, numbers for math game, letters for language game)"
+      "props": "3-5 small props directly related to the game's educational subject (e.g., wooden numbers for counting, colored pencils for drawing, figurines for storytelling, letter blocks for literacy). NO generic nature elements unless the game is specifically about nature."
     },
     "composition": {
       "camera_angle": "Top-down flat-lay or 45-degree styled angle",
@@ -107,22 +114,24 @@
       "direction": "Even, diffused overhead light or large softbox from above",
       "shadows": "Minimal, clean shadows"
     },
-    "mood": "Creative, editorial, Instagram-worthy, educational and credible (not fantasy)"
+    "mood": "Creative, editorial, Instagram-worthy, educational and credible",
+    "variation_notes": "Props must be chosen based on the product analysis (name, theme, features, colors). NEVER default to nature elements. Each generation should feel unique and directly connected to the game's subject."
   },
   {
     "id": "g6",
     "label": "Hero Shot (Social)",
-    "description": "Fond propre, esthetique pour Instagram.",
+    "description": "Fond propre, esthetique pour reseaux sociaux.",
     "icon": "camera",
+    "creativity": "semi-stable",
     "environment": {
       "setting": "Minimalist studio-style setting",
-      "background": "Solid soft beige (#F9F7F4) or clean white, seamless",
+      "background": "Seamless solid Sola Didact brand tone: soft white (#f5f5f0), muted green (sage/olive wash from #5dac3e), or dark charcoal (#3a383e) — chosen to best contrast with the product",
       "surface": "Clean, flat surface matching background tone",
       "props": "None. Product only."
     },
     "composition": {
       "camera_angle": "Front-facing, slightly elevated (10-15 degrees)",
-      "framing": "Product centered, high aesthetic value, perfect for Instagram cover or Reel thumbnail",
+      "framing": "Product centered, high aesthetic value, perfect for social media",
       "depth_of_field": "Sharp focus throughout, clean edges"
     },
     "lighting_override": {
@@ -130,5 +139,77 @@
       "shadows": "Clean, defined but soft shadow beneath product"
     },
     "mood": "High aesthetic, minimalist, social media ready, premium brand feel"
+  },
+  {
+    "id": "g7",
+    "label": "Exterieur / Nature",
+    "description": "Plein air, jardin, nature suisse.",
+    "icon": "leaf",
+    "creativity": "adaptive",
+    "environment": {
+      "setting": "Outdoor Swiss/European natural setting",
+      "background": "Green foliage, wildflowers, dappled sunlight, distant meadow or garden",
+      "surface": "Varies: weathered garden table, stone bench, blanket on grass, tree stump",
+      "props": "Natural elements only — leaves, flowers, grass, bark"
+    },
+    "composition": {
+      "camera_angle": "Slightly elevated or eye-level",
+      "framing": "Product in natural context with visible greenery",
+      "depth_of_field": "Moderate, product sharp, nature background softly present"
+    },
+    "lighting_override": {
+      "direction": "Bright, soft natural daylight, possibly dappled through leaves",
+      "shadows": "Natural, organic shadow patterns"
+    },
+    "mood": "Fresh air, nature, outdoor connection, authentic and not staged",
+    "variation_notes": "The outdoor surface and surrounding nature elements vary each time. Can be garden, terrace, meadow, forest edge."
+  },
+  {
+    "id": "g8",
+    "label": "Fournitures Scolaires",
+    "description": "Crayons, cahiers, ambiance studieuse.",
+    "icon": "books",
+    "creativity": "semi-stable",
+    "environment": {
+      "setting": "Light wood desk with school supplies",
+      "background": "European school setting, warm natural light",
+      "surface": "Light wood desk",
+      "props": "Colored pencils, notebooks, ruler, pencil case — arranged naturally"
+    },
+    "composition": {
+      "camera_angle": "Top-down or slightly angled",
+      "framing": "Product among supplies, product is clearly the focal point",
+      "depth_of_field": "Moderate, product sharp, supplies slightly softer"
+    },
+    "lighting_override": {
+      "direction": "Natural daylight, bright and even",
+      "shadows": "Soft, motivating"
+    },
+    "mood": "Fresh, organized, motivating, studious",
+    "variation_notes": "The specific arrangement and selection of school supplies can vary."
+  },
+  {
+    "id": "g9",
+    "label": "Ambiance Boutique",
+    "description": "Etageres, magasin de jouets.",
+    "icon": "shop",
+    "creativity": "semi-stable",
+    "environment": {
+      "setting": "Charming European toy shop",
+      "background": "Surrounding shelves with games and educational materials, slightly out of focus",
+      "surface": "Wooden shelf",
+      "props": "Neighboring products visible but not competing"
+    },
+    "composition": {
+      "camera_angle": "Eye-level or slightly below, as if discovering the product on a shelf",
+      "framing": "Product on shelf with curated boutique context",
+      "depth_of_field": "Shallow, product sharp, shop background bokeh"
+    },
+    "lighting_override": {
+      "direction": "Warm, soft ambient retail lighting",
+      "shadows": "Gentle, inviting"
+    },
+    "mood": "Curated quality boutique, warm, inviting, not chain store",
+    "variation_notes": "Shop details vary: shelf styles, neighboring products, background elements."
   }
 ]

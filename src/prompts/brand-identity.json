@@ -9,9 +9,13 @@
     "avoid": "Harsh shadows, artificial studio flash, neon lighting"
   },
   "color_palette": {
-    "primary_accent": "#C43333 (Brick Red)",
-    "background": "#F9F7F4 (Light Beige)",
-    "materials": ["Light wood (oak, birch)", "Soft textiles (cotton, linen)", "Natural fibers"],
+    "primary_accent": "#5dac3e (vert)",
+    "background": "#f5f5f0 (Light Beige)",
+    "materials": [
+      "Light wood (oak, birch)",
+      "Soft textiles (cotton, linen)",
+      "Natural fibers"
+    ],
     "tones": "Warm neutrals, muted earth tones, soft pastels",
     "avoid": "Excessive saturation, neon colors, cold blue tones"
   },

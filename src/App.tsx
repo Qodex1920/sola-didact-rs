@@ -7,7 +7,7 @@ import { ResultDisplay } from '@/components/ResultDisplay';
 import { GenerationHistory } from '@/components/GenerationHistory';
 import { useImageUpload } from '@/hooks/useImageUpload';
 import { useGeneration } from '@/hooks/useGeneration';
-import { AppMode, ProductCategory, EMPTY_CUSTOM_CONTEXT, serializeCustomContext, type ImageSize, type AspectRatio, type VideoQuality, type CustomContextFields } from '@/types';
+import { AppMode, ProductCategory, EMPTY_CUSTOM_CONTEXT, serializeCustomContext, type ImageSize, type AspectRatio, type VideoQuality, type VideoDuration, type CustomContextFields } from '@/types';
 import { GAME_CONTEXTS, FURNITURE_CONTEXTS } from '@/constants';
 
 export default function App() {
@@ -22,13 +22,14 @@ export default function App() {
   const [productDescription, setProductDescription] = useState('');
   const [overlayText, setOverlayText] = useState('');
   const [videoQuality, setVideoQuality] = useState<VideoQuality>('fast');
+  const [videoDuration, setVideoDuration] = useState<VideoDuration>(8);
 
   const imageUpload = useImageUpload();
   const generation = useGeneration();
 
   const contexts = category === ProductCategory.GAME ? GAME_CONTEXTS : FURNITURE_CONTEXTS;
 
-  // Auto-analyze when image is uploaded
+  // Auto-analyze when first image is uploaded
   useEffect(() => {
     if (imageUpload.uploadedImage && !generation.productAnalysis && !generation.isAnalyzing) {
       generation.autoAnalyze(imageUpload.uploadedImage);
@@ -40,11 +41,20 @@ export default function App() {
     setSelectedContext(cat === ProductCategory.GAME ? GAME_CONTEXTS[0] : FURNITURE_CONTEXTS[0]);
   };
 
-  const handleImageClear = useCallback(() => {
-    imageUpload.clearImage();
+  const handleClearAllImages = useCallback(() => {
+    imageUpload.clearImages();
     generation.setProductAnalysis(null);
     generation.setAnalysisText('');
     setProductDescription('');
+  }, [imageUpload, generation]);
+
+  const handleRemoveImage = useCallback((index: number) => {
+    imageUpload.removeImage(index);
+    if (index === 0) {
+      generation.setProductAnalysis(null);
+      generation.setAnalysisText('');
+      setProductDescription('');
+    }
   }, [imageUpload, generation]);
 
   const handleAnalyze = useCallback(() => {
@@ -74,9 +84,11 @@ export default function App() {
         productDescription: productDescription.trim() || undefined,
         overlayText: overlayText.trim() || undefined,
         videoQuality,
+        additionalImages: imageUpload.additionalImages.length > 0 ? imageUpload.additionalImages : undefined,
+        videoDuration,
       })
       .then(() => setHistoryKey((k) => k + 1));
-  }, [generation, appMode, imageUpload.uploadedImage, selectedContext, category, aspectRatio, proSize, customContext, useCustomContext, productDescription, overlayText, videoQuality]);
+  }, [generation, appMode, imageUpload.uploadedImage, imageUpload.additionalImages, selectedContext, category, aspectRatio, proSize, customContext, useCustomContext, productDescription, overlayText, videoQuality, videoDuration]);
 
   const handleHistorySelect = useCallback(
     (asset: import('@/types').GeneratedAsset) => {
@@ -103,13 +115,15 @@ export default function App() {
               onProSizeChange={setProSize}
               aspectRatio={aspectRatio}
               onAspectRatioChange={setAspectRatio}
+              uploadedImages={imageUpload.uploadedImages}
               uploadedImage={imageUpload.uploadedImage}
               isDragging={imageUpload.isDragging}
               onFileSelect={imageUpload.handleFileSelect}
               onDrop={imageUpload.handleDrop}
               onDragOver={imageUpload.handleDragOver}
               onDragLeave={imageUpload.handleDragLeave}
-              onClearImage={handleImageClear}
+              onRemoveImage={handleRemoveImage}
+              onClearAllImages={handleClearAllImages}
               onAnalyze={handleAnalyze}
               onGenerate={handleGenerate}
               isLoading={generation.isLoading}
@@ -122,6 +136,8 @@ export default function App() {
               onOverlayTextChange={setOverlayText}
               videoQuality={videoQuality}
               onVideoQualityChange={setVideoQuality}
+              videoDuration={videoDuration}
+              onVideoDurationChange={setVideoDuration}
             />
           </div>
 

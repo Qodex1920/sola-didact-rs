@@ -1,42 +1,46 @@
 import React, { useRef } from 'react';
 
 interface ImageUploaderProps {
-  currentImage: string | null;
+  images: string[];
   isDragging: boolean;
   onFileSelect: (file: File) => void;
   onDrop: (e: React.DragEvent) => void;
   onDragOver: (e: React.DragEvent) => void;
   onDragLeave: (e: React.DragEvent) => void;
-  onClear: () => void;
+  onRemoveImage: (index: number) => void;
+  onClearAll: () => void;
 }
 
+const MAX_IMAGES = 3;
+
 export const ImageUploader: React.FC<ImageUploaderProps> = ({
-  currentImage,
+  images,
   isDragging,
   onFileSelect,
   onDrop,
   onDragOver,
   onDragLeave,
-  onClear,
+  onRemoveImage,
+  onClearAll,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) onFileSelect(file);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  return (
-    <div className="w-full">
-      <input
-        type="file"
-        accept="image/*"
-        className="hidden"
-        ref={fileInputRef}
-        onChange={handleFileChange}
-      />
-
-      {!currentImage ? (
+  if (images.length === 0) {
+    return (
+      <div className="w-full">
+        <input
+          type="file"
+          accept="image/*"
+          className="hidden"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+        />
         <div
           onClick={() => fileInputRef.current?.click()}
           onDrop={onDrop}
@@ -66,32 +70,69 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
             <p className="font-medium text-gray-700">
               {isDragging ? 'Relâchez pour importer' : 'Glissez-déposez ou cliquez pour importer'}
             </p>
-            <p className="text-sm text-gray-400 mt-1">JPG, PNG (Max 5MB)</p>
+            <p className="text-sm text-gray-400 mt-1">JPG, PNG (Max 5MB) - Jusqu'a 3 images</p>
           </div>
         </div>
-      ) : (
-        <div
-          className="relative group rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-white"
-          onDrop={onDrop}
-          onDragOver={onDragOver}
-          onDragLeave={onDragLeave}
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full" onDrop={onDrop} onDragOver={onDragOver} onDragLeave={onDragLeave}>
+      <input
+        type="file"
+        accept="image/*"
+        className="hidden"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+      />
+      <div className="grid grid-cols-3 gap-3">
+        {images.map((img, index) => (
+          <div
+            key={index}
+            className="relative group rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-white aspect-square"
+          >
+            <img src={img} alt={`Image ${index + 1}`} className="w-full h-full object-contain p-2" />
+            {index === 0 && (
+              <span className="absolute top-1.5 left-1.5 bg-sola-primary text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
+                Principale
+              </span>
+            )}
+            <button
+              onClick={() => onRemoveImage(index)}
+              className="absolute top-1.5 right-1.5 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+            >
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        ))}
+
+        {images.length < MAX_IMAGES && (
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className={`rounded-xl border-2 border-dashed aspect-square flex flex-col items-center justify-center gap-1 transition-colors ${
+              isDragging
+                ? 'border-sola-primary bg-sola-primary/5'
+                : 'border-gray-300 bg-gray-50 hover:border-sola-primary hover:bg-white'
+            }`}
+          >
+            <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            <span className="text-[10px] text-gray-400 font-medium">Ajouter</span>
+          </button>
+        )}
+      </div>
+
+      {images.length > 1 && (
+        <button
+          onClick={onClearAll}
+          className="mt-2 text-xs text-red-500 hover:text-red-600 font-medium"
         >
-          <img src={currentImage} alt="Uploaded product" className="w-full h-64 object-contain p-4" />
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="bg-white text-sola-text px-4 py-2 rounded-full font-medium text-sm hover:bg-gray-100"
-            >
-              Changer
-            </button>
-            <button
-              onClick={onClear}
-              className="bg-red-500 text-white px-4 py-2 rounded-full font-medium text-sm hover:bg-red-600"
-            >
-              Supprimer
-            </button>
-          </div>
-        </div>
+          Tout supprimer
+        </button>
       )}
     </div>
   );

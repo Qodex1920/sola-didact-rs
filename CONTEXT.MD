@@ -136,8 +136,9 @@ Style visuel
 	•	Bois clair, textiles, matériaux chaleureux
 
 Couleurs de référence
-	•	Rouge brique : #5dac3e
-	•	Beige clair : #3a383e
+	•	Vert : #5dac3e
+    •	blanc: #f5f5f0
+	•	gris : #3a383e
 
 (à intégrer subtilement, jamais de manière agressive)
 

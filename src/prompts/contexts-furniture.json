@@ -4,37 +4,39 @@
     "label": "Classe Moderne",
     "description": "Environnement scolaire realiste.",
     "icon": "school",
+    "creativity": "stable",
     "environment": {
       "setting": "Modern European classroom with contemporary furniture",
-      "background": "Educational posters, whiteboard, windows with natural light",
+      "background": "Educational materials on shelves, whiteboard on wall, windows",
       "surface": "Institutional flooring (wood or light vinyl)",
-      "props": "Other school furniture, storage units, educational materials on shelves"
+      "props": "Other school furniture: desks, chairs, storage units"
     },
     "composition": {
-      "camera_angle": "Eye-level or slightly above (20 degrees), three-quarter view showing furniture dimensions",
-      "framing": "Furniture piece in context, showing scale relative to room and other objects",
+      "camera_angle": "Eye-level or slightly above (20 degrees), three-quarter view showing dimensions",
+      "framing": "Furniture in context, showing scale relative to room and other objects",
       "depth_of_field": "Moderate, furniture sharp, room context present but softer"
     },
     "lighting_override": {
-      "direction": "Large window natural light combined with overhead institutional lighting",
+      "direction": "Large window natural light combined with soft overhead institutional lighting",
       "shadows": "Natural, even distribution"
     },
     "mood": "Professional, institutional, modern education environment",
-    "proportion_notes": "Show furniture at realistic scale relative to standard classroom dimensions. Include reference objects (door frame, desk, chair) for size context."
+    "proportion_notes": "Show furniture at realistic scale relative to standard classroom dimensions."
   },
   {
     "id": "f2",
     "label": "Salle de Jeux",
     "description": "Couleurs douces, design enfantin.",
     "icon": "dice",
+    "creativity": "semi-stable",
     "environment": {
       "setting": "Children's playroom with soft, child-friendly design",
-      "background": "Pastel walls, playful but tasteful decor, storage bins",
+      "background": "Pastel walls with fresh green accents, playful but tasteful decor",
       "surface": "Soft play mat or clean wooden floor",
-      "props": "Toys, cushions, other child furniture, brick red accents in decor"
+      "props": "Toys, cushions, child furniture — vary based on furniture type"
     },
     "composition": {
-      "camera_angle": "Child's eye-level (low angle, 60-80cm height), showing furniture as children see it",
+      "camera_angle": "Child's eye-level (60-80cm height)",
       "framing": "Furniture as part of play environment, showing functionality",
       "depth_of_field": "Moderate, furniture in focus, playful context visible"
     },
@@ -42,14 +44,16 @@
       "direction": "Bright, warm natural light from windows",
       "shadows": "Soft, playful"
     },
-    "mood": "Playful, design-oriented, child-friendly, safe environment",
-    "proportion_notes": "Show furniture at child-appropriate scale. If possible, suggest child-sized proportions by including toys or child-height references."
+    "mood": "Playful, design-oriented, child-friendly, safe",
+    "proportion_notes": "Show furniture at child-appropriate scale.",
+    "variation_notes": "Surrounding toys and elements adapt to the furniture type: storage shows organized toys, table shows craft materials, seating shows cushions."
   },
   {
     "id": "f3",
     "label": "Coin Calme",
-    "description": "Poufs, lumiere chaude.",
+    "description": "Poufs, lumiere chaude, atmosphere apaisante.",
     "icon": "quiet",
+    "creativity": "semi-stable",
     "environment": {
       "setting": "Quiet corner with comfortable seating and warm atmosphere",
       "background": "Warm-toned wall, low bookshelf, indoor plant",
@@ -58,7 +62,7 @@
     },
     "composition": {
       "camera_angle": "Low angle (ground level to 30 degrees), intimate and inviting",
-      "framing": "Furniture as anchor piece of the calm corner, surrounded by comfort elements",
+      "framing": "Furniture as anchor piece of the calm corner",
       "depth_of_field": "Shallow, furniture sharp, cozy surroundings gently blurred"
     },
     "lighting_override": {
@@ -66,22 +70,23 @@
       "shadows": "Long, warm shadows creating depth"
     },
     "mood": "Relaxing, safe, nurturing atmosphere",
-    "proportion_notes": "Ensure furniture appears stable, grounded, and appropriately sized for the quiet corner setting."
+    "variation_notes": "Exact arrangement of comfort elements may vary while keeping the nurturing atmosphere."
   },
   {
     "id": "f4",
     "label": "Bureau Enseignant",
-    "description": "Fonctionnalite adulte.",
+    "description": "Espace de travail adulte, fonctionnel.",
     "icon": "briefcase",
+    "creativity": "stable",
     "environment": {
       "setting": "Teacher's workspace or school office",
-      "background": "Office elements: filing cabinet, bookshelf, diplomas or educational materials",
+      "background": "Filing cabinet or bookshelf, educational materials",
       "surface": "Office or classroom floor",
-      "props": "Desk organizer, laptop or notebook, coffee mug, professional items"
+      "props": "Desk organizer, notebook or laptop, coffee mug, professional items"
     },
     "composition": {
       "camera_angle": "Eye-level (adult height), straight-on or slight three-quarter angle",
-      "framing": "Furniture in professional workspace context, showing adult-scale functionality",
+      "framing": "Furniture in professional workspace context, adult-scale",
       "depth_of_field": "Moderate, sharp furniture with soft office background"
     },
     "lighting_override": {
@@ -89,21 +94,22 @@
       "shadows": "Professional, even"
     },
     "mood": "Professional, functional, adult workspace, organized",
-    "proportion_notes": "Show furniture at adult scale. Include adult-sized references (office chair, standard desk) to establish correct proportions."
+    "proportion_notes": "Include adult-sized references for correct proportions."
   },
   {
     "id": "f5",
     "label": "Creche",
     "description": "Douceur, securite, nature.",
     "icon": "baby",
+    "creativity": "semi-stable",
     "environment": {
-      "setting": "Nursery or daycare setting with very gentle, safe atmosphere",
-      "background": "Soft pastel walls, natural wood elements, safety-conscious design",
-      "surface": "Soft, safe flooring (cork, rubber play mat, carpet)",
-      "props": "Natural materials (wooden toys, cotton items), safety elements, small plants"
+      "setting": "Nursery or daycare setting with gentle, safe atmosphere",
+      "background": "Pastel walls, natural wood elements, safety-conscious design",
+      "surface": "Soft, safe flooring (cork, play mat, carpet)",
+      "props": "Wooden toys, cotton items, small plants — vary based on furniture piece"
     },
     "composition": {
-      "camera_angle": "Low angle (child/toddler height, 30-50cm), showing furniture from small child perspective",
+      "camera_angle": "Toddler height (30-50cm)",
       "framing": "Furniture as safe, welcoming element in nurturing space",
       "depth_of_field": "Soft overall, dreamy quality, furniture in focus"
     },
@@ -112,29 +118,102 @@
       "shadows": "Minimal, very soft"
     },
     "mood": "Gentle, safe, welcoming, nurturing",
-    "proportion_notes": "Furniture must appear safe and correctly sized for toddlers/infants. Show rounded edges, stable base, and appropriate height for very young children."
+    "proportion_notes": "Show rounded edges and stable base. Correctly sized for toddlers.",
+    "variation_notes": "Contextual toys and items vary based on the specific furniture piece."
   },
   {
     "id": "f6",
     "label": "Minimaliste",
     "description": "Fond epure, focus design.",
     "icon": "sparkles",
+    "creativity": "semi-stable",
     "environment": {
       "setting": "Minimalist studio environment",
-      "background": "Solid Sola beige (#F9F7F4) or clean white, seamless backdrop",
+      "background": "Seamless solid Sola Didact brand tone: soft white (#f5f5f0), muted green (sage/olive wash from #5dac3e), or dark charcoal (#3a383e) — chosen to best contrast with the furniture",
       "surface": "Clean floor matching background or slight contrast",
       "props": "None. Furniture piece only."
     },
     "composition": {
-      "camera_angle": "Three-quarter view at eye-level, showing depth and proportions clearly",
-      "framing": "Furniture centered with generous negative space, focus purely on form and design",
+      "camera_angle": "Three-quarter view at eye-level, showing depth and proportions",
+      "framing": "Furniture centered with generous negative space, focus on form and design",
       "depth_of_field": "Sharp throughout, showcasing every design detail"
     },
     "lighting_override": {
-      "direction": "Studio lighting: key light from 45 degrees left, fill from right, rim light for edge definition",
-      "shadows": "Clean, defined shadow beneath furniture for grounding"
+      "direction": "Studio: key light 45 degrees left, fill right, rim light for edge definition",
+      "shadows": "Clean, defined shadow beneath for grounding"
     },
     "mood": "High-end design showcase, premium, architectural",
-    "proportion_notes": "With no environmental references, ensure furniture proportions are absolutely accurate. Maintain correct height-to-width-to-depth ratios."
+    "proportion_notes": "Ensure absolutely accurate proportions with no environmental references."
+  },
+  {
+    "id": "f7",
+    "label": "Classe Flexible",
+    "description": "Amenagement modulable, ilots collaboratifs.",
+    "icon": "refresh",
+    "creativity": "stable",
+    "environment": {
+      "setting": "Flexible classroom with modular learning islands",
+      "background": "Multiple configurations: collaborative, individual, group clusters",
+      "surface": "Institutional flooring",
+      "props": "Other complementary furniture pieces suggesting modularity"
+    },
+    "composition": {
+      "camera_angle": "Slightly elevated, wide enough to show arrangement",
+      "framing": "Furniture as part of dynamic, reconfigurable space",
+      "depth_of_field": "Moderate, main piece sharp, surrounding context visible"
+    },
+    "lighting_override": {
+      "direction": "Bright natural light from large windows",
+      "shadows": "Even, institutional"
+    },
+    "mood": "Active learning, dynamic, collaborative, modern pedagogy"
+  },
+  {
+    "id": "f8",
+    "label": "Exterieur",
+    "description": "Cour, terrasse, espace vert.",
+    "icon": "leaf",
+    "creativity": "adaptive",
+    "environment": {
+      "setting": "School courtyard, garden terrace, or covered outdoor learning area",
+      "background": "Natural greenery: trees, grass, planters",
+      "surface": "Varies: paved schoolyard, wooden deck, garden path, under pergola",
+      "props": "Natural elements only"
+    },
+    "composition": {
+      "camera_angle": "Eye-level or slightly above",
+      "framing": "Furniture in outdoor educational context with visible greenery",
+      "depth_of_field": "Moderate, furniture sharp, nature background present"
+    },
+    "lighting_override": {
+      "direction": "Bright natural daylight",
+      "shadows": "Soft, natural outdoor shadows"
+    },
+    "mood": "European outdoor educational setting, fresh, natural",
+    "variation_notes": "The specific outdoor context varies. Choose the setting that best suits the specific furniture piece."
+  },
+  {
+    "id": "f9",
+    "label": "Mise en Situation",
+    "description": "Mobilier en cours d'utilisation, adapte au produit.",
+    "icon": "camera",
+    "creativity": "highly-adaptive",
+    "environment": {
+      "setting": "Natural educational context where the furniture is actively being used",
+      "background": "Matches the furniture's intended use: primary school, nursery, office, common area",
+      "surface": "Appropriate flooring for the setting",
+      "props": "Usage clues adapted to the piece: open notebook on desk, organized materials on shelf, art supplies on table, jacket on chair"
+    },
+    "composition": {
+      "camera_angle": "Natural observation angle, as if capturing a candid moment",
+      "framing": "Furniture in active use context with subtle human presence clues",
+      "depth_of_field": "Moderate, furniture sharp, environment contextual"
+    },
+    "lighting_override": {
+      "direction": "Warm natural light appropriate to the setting",
+      "shadows": "Natural, contextual"
+    },
+    "mood": "Candid moment during a real school day, authentic, lived-in",
+    "variation_notes": "Scene adapts completely to the specific furniture piece. Chair at a desk with signs of recent use. Table with activity in progress. Shelf with organized materials. Storage with supplies. Each generation feels unique and adapted to the product."
   }
 ]
